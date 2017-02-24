@@ -1,26 +1,28 @@
-#include <iostream>
-#include <stdio.h>
-#include <string.h>
+#include<iostream>
+#include<string.h>
+#include<cstring>
+#include<algorithm>
 using namespace std;
-const  int maxn=1000000+32;
-int a[maxn];
+long long n,x,maxx,p=0;
+long long a[30000];
+bool cmp(long long x,long long y)
+{
+    return x>y;
+}
 int main()
 {
-    int n,ans,data;
-        cin>>n;
-        memset(a,0,sizeof(a));
-        for(int i=0;i<n;i++)
-        {
-            scanf("%d",&data);
-            a[data]++;
-        }
-        ans=a[0]%2;
-        for(int i=1;i<maxn;i++)
-        {
-            a[i]=a[i-1]/2+a[i];
-            if(a[i]%2==1)
-            ans++;
-        }
-        printf("%d\n",ans);  
+    cin >>n;
+   for (int i=0;i<n;i++)
+    cin>>a[i];
+    sort(a,a+n,cmp);
+    p+=a[0];
+    for (int i=1;i<n;i++)
+    {
+       while (a[i]>=a[i-1])a[i]--;
+       if (a[i]>=0)
+        p+=a[i];
+    }
+    cout<<p;
+
     return 0;
 }
