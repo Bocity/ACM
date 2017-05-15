@@ -103,7 +103,6 @@ class Fraction {
     void normalize() {
         if (den == 0) {
             den = 1;
-            return;
         }
         if (den * num < 0) {
             den = abs(den);
@@ -126,10 +125,12 @@ void Fraction::setValue(int n, int d) {
 Fraction::Fraction(int n) {
     num = n;
     den = 1;
+    this->normalize();
 }
 Fraction::Fraction() {
     num = 0;
     den = 1;
+    this->normalize();
 }
 Fraction::Fraction(int n, int d) {
     if (den == 0) {
@@ -138,10 +139,11 @@ Fraction::Fraction(int n, int d) {
     }
     num = n;
     den = d;
+    this->normalize();
 }
 
 int main() {
-    Fraction f1, f2(2), f3(3, 4);
+    Fraction f1, f2(-9, 0), f3(3, 4);
     cout << "f1";
     f1.output();
     cout << "f2";
