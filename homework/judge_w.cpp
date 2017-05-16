@@ -29,15 +29,15 @@ void find_next_nonspace(int &c1, int &c2, FILE *&f1, FILE *&f2, string &ret) {
                     c2 = fgetc(f2);
                 } while (isspace(c2));
                 continue;
-            } else if ((c1 == '\r' && c2 == '\n')) {
+            } else if ((c1 == '\r' && c2 == '\n')) { //解决 换行问题
                 c1 = fgetc(f1);
             } else if ((c2 == '\r' && c1 == '\n')) {
                 c2 = fgetc(f2);
-            } else {
+            } else { //换行和格式不一样
                 ret = "PE";
             }
         }
-        if (isspace(c1)) {
+        if (isspace(c1)) { //对齐
             c1 = fgetc(f1);
         }
         if (isspace(c2)) {
