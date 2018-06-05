@@ -40,6 +40,7 @@ int main() {
         }
         system(s2);
         sleep(2);
+        cout << s2;
         string f = "test0.out";
         string ans[11] = {};
         for (int i = 0; i <= 9; i++) {

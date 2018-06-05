@@ -5,6 +5,21 @@
         "cmath": "cpp",
         "cstdlib": "cpp",
         "limits": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "*.tcc": "cpp",
+        "cctype": "cpp",
+        "cstddef": "cpp",
+        "cstdio": "cpp",
+        "cstring": "cpp",
+        "ctime": "cpp",
+        "exception": "cpp",
+        "fstream": "cpp",
+        "iomanip": "cpp",
+        "istream": "cpp",
+        "memory": "cpp",
+        "new": "cpp",
+        "sstream": "cpp",
+        "streambuf": "cpp",
+        "cstdint": "cpp"
     }
 }

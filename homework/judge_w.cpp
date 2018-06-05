@@ -8,7 +8,7 @@
 #include <map>
 #include <queue>
 #include <string>
-#include <unistd.h>
+#include <windows.h>
 #include <vector>
 using namespace std;
 int n;
@@ -16,7 +16,6 @@ string s, y;
 
 char s2[100] = {"g++ "};
 void find_next_nonspace(int &c1, int &c2, FILE *&f1, FILE *&f2, string &ret) {
-    // Find the next non-space character or \n.
     while ((isspace(c1)) || (isspace(c2))) {
         if (c1 != c2) {
             if (c2 == EOF) {
@@ -29,15 +28,15 @@ void find_next_nonspace(int &c1, int &c2, FILE *&f1, FILE *&f2, string &ret) {
                     c2 = fgetc(f2);
                 } while (isspace(c2));
                 continue;
-            } else if ((c1 == '\r' && c2 == '\n')) { //Ëß£ÂÜ≥ Êç¢Ë°åÈóÆÈ¢ò
+            } else if ((c1 == '\r' && c2 == '\n')) {
                 c1 = fgetc(f1);
             } else if ((c2 == '\r' && c1 == '\n')) {
                 c2 = fgetc(f2);
-            } else { //Êç¢Ë°åÂíåÊ†ºÂºè‰∏ç‰∏ÄÊ†∑
+            } else {
                 ret = "PE";
             }
         }
-        if (isspace(c1)) { //ÂØπÈΩê
+        if (isspace(c1)) {
             c1 = fgetc(f1);
         }
         if (isspace(c2)) {
@@ -45,7 +44,7 @@ void find_next_nonspace(int &c1, int &c2, FILE *&f1, FILE *&f2, string &ret) {
         }
     }
 }
-string compare_zoj(const char *file1, const char *file2) {
+string compare_diff(const char *file1, const char *file2) {
     string ret = "AC";
     int c1, c2;
     FILE *f1, *f2;
@@ -54,15 +53,11 @@ string compare_zoj(const char *file1, const char *file2) {
     if (!f1 || !f2) {
         ret = "RE";
     } else
-        for (;;) {
-            // Find the first non-space character at the beginning of line.
-            // Blank lines are skipped.
+        while(1) {
             c1 = fgetc(f1);
             c2 = fgetc(f2);
             find_next_nonspace(c1, c2, f1, f2, ret);
-            // Compare the current line.
-            for (;;) {
-                // Read until 2 files return a space or 0 together.
+            while(1) {
                 while ((!isspace(c1) && c1) || (!isspace(c2) && c2)) {
                     if (c1 == EOF && c2 == EOF) {
                         goto end;
@@ -71,7 +66,6 @@ string compare_zoj(const char *file1, const char *file2) {
                         break;
                     }
                     if (c1 != c2) {
-                        // Consecutive non-space characters should be all exactly the same
                         ret = "WA";
                         goto end;
                     }
@@ -97,6 +91,7 @@ end:
     if (f2) fclose(f2);
     return ret;
 }
+/*
 string compare_diff(const char *file1, const char *file2) {
     char diff[1024];
     // cout << file1 << " " << file2;
@@ -110,18 +105,19 @@ string compare_diff(const char *file1, const char *file2) {
     else
         return "AC";
 }
+*/
 int main() {
-    cout << "ËæìÂÖ•1ÈÄâÊã©Ê∫êÊñá‰ª∂ÔºåËæìÂÖ•2ÈÄâÊã©ÂèØÊâßË°åÊñá‰ª∂ÔºåÂÖ∂‰ªñÈÄÄÂá∫Á®ãÂ∫è\n";
+    cout << " ‰»Î1—°‘Ò‘¥Œƒº˛£¨ ‰»Î2—°‘Òø…÷¥––Œƒº˛£¨∆‰À˚ÕÀ≥ˆ≥Ã–Ú\n";
     cin >> y;
     char s3[100] = {"more test0.in | a.exe > dif.out "};
     if (y == "1") {
-        cout << "ËæìÂÖ•Â∏¶ËØÑÊµãÁ®ãÂ∫èÊ∫êÊñá‰ª∂ÂêçÔºö";
+        cout << " ‰»Î¥¯∆¿≤‚≥Ã–Ú‘¥Œƒº˛√˚£∫";
         cin >> s;
         for (int i = 0; i < s.size(); i++) {
             s2[4 + i] = s[i];
         }
         system(s2);
-        sleep(2);
+        Sleep(2);
         string f = "test0.out";
         string ans[11] = {};
         for (int i = 0; i <= 9; i++) {
@@ -151,7 +147,7 @@ int main() {
                 sum += 0;
             }
         }
-        cout << "ÊÄªÂàÜÔºö" << sum;
+        cout << "◊‹∑÷£∫" << sum;
         cin >> sum;
 
     } else if (y == "2") {
@@ -161,7 +157,7 @@ int main() {
         string c = " | ";
         string d;
         string e = " > dif.out";
-        cout << "ËæìÂÖ•ÂèØÊâßË°åÊñá‰ª∂ÂêçÔºö";
+        cout << " ‰»Îø…÷¥––Œƒº˛√˚£∫";
         cin >> d;
         string ans[11] = {};
         for (int i = 0; i <= 9; i++) {
@@ -194,11 +190,9 @@ int main() {
                 sum += 0;
             }
         }
-        cout << "ÊÄªÂàÜÔºö" << sum;
+        cout << "◊‹∑÷£∫" << sum;
         cin >> sum;
 
-    } else
-        return 0;
-
+    } else return 0;
     return 0;
 }
