@@ -1,0 +1,65 @@
+#include <algorithm>
+#include <climits>
+#include <cmath>
+#include <cstdio>
+#include <cstring>
+#include <deque>
+#include <iostream>
+#include <map>
+#include <queue>
+#include <set>
+#include <string>
+#include <vector>
+#define ll long long
+#define endl "\n"
+#define DE cout << "------" << endl
+#define mems(a, b) memset(a, b, sizeof a)
+#define pii pair<int, int>
+using namespace std;
+const int MOD = 1e9 + 7;
+const int INF = 0x3f3f3f3f;
+int sg[1 << 21];
+bool wzf(int n, int m) {
+    if (n > m) swap(n, m);
+    int k = m - n;
+    int a = (k * (1.0 + sqrt(5.0)) / 2.0);
+    if (a == n)
+        return 0;
+    else
+        return 1;
+}
+int main() {
+    ios::sync_with_stdio(false);
+    int cas, n, m, ty;
+    cin >> cas;
+    while (cas--) {
+        cin >> ty >> n >> m;
+        if (ty == 1) {
+            if ((n + m) & 1)
+                cout << "B" << endl;
+            else
+                cout << "G" << endl;
+        } else if (ty == 2) {
+            if ((n ^ m) == 0) {
+                cout << "G" << endl;
+            } else {
+                cout << "B" << endl;
+            }
+        } else if (ty == 4) {
+            if (wzf(n, m)) {
+                cout << "B" << endl;
+            } else {
+                cout << "G" << endl;
+            }
+        } else if (ty == 3) {
+            if (n * m == 2) {
+                cout << "B" << endl;
+            } else if (n == 3 && m == 3) {
+                cout << "G" << endl;
+            } else {
+                cout << "D" << endl;
+            }
+        }
+    }
+    return 0;
+}
